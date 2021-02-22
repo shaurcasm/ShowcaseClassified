@@ -1,0 +1,12 @@
+// Device size constants
+// Modern regular size smartphones, iphoneX (landscape view)
+$screen-xs-max: 375px;
+
+// eXtra small devices
+@mixin xs {
+    @media (max-width: #{$screen-xs-max}) {
+        @content;
+    }
+}
+
+// Add more for tighter UI-to-display response.

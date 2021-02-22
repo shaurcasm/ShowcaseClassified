@@ -1,0 +1,61 @@
+@import '../../constants/colors.scss';
+@import '../../utils/responsive.scss';
+
+.product {
+    background-color: $cultured;
+
+    h3 {
+        font-size: 1.8rem;
+        color: $black-chocolate;
+        margin: 1rem;
+    }
+
+    .image-container {
+        width: 400px;
+        height: 300px;
+        margin: 1rem;
+
+        .product-image {
+            width: inherit;
+            height: inherit;
+            background: $light-green;
+        }
+
+        @include xs {
+            width: 300px;
+            height: 200px;
+        }
+    }
+
+    .detail-container {
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            width: 30%;
+            height: auto;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            color: $cultured;
+            background-color: $space-cadet;
+            border-radius:10%;
+
+            &:hover {
+                transform: scaleY(0.9);
+                font-size: 1.1rem;
+                cursor: pointer;
+            }
+        }
+
+        #cost {
+            align-self: center;
+            font-size: 1.5rem;
+            color: $black-chocolate;
+        }
+
+        .upvoted {
+            background-color: darken($light-green, 45%);
+        }
+    }
+}

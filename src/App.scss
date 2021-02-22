@@ -1,0 +1,119 @@
+@import './constants/colors.scss';
+@import './utils/responsive.scss';
+
+$body-color: #000;
+$headings-color: $xiketic;
+
+@import "~bootstrap/scss/bootstrap";
+
+html {
+    margin: 0;
+    font-size: 15px;
+    max-width: 100%;
+    min-height: 100%;
+
+    @include xs {
+        font-size: 10px;
+    }
+}
+
+body {
+
+    .app-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        min-height: 100vh;
+        height: auto;
+        background: radial-gradient(ellipse farthest-corner at 100% 0%, black 0%, $xiketic 69%, $space-cadet 75%, $xiketic 90%);
+
+        header {
+            background-color: $cultured; 
+            color: $xiketic;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            h1 {
+                margin-left: 1vw;
+                text-align: center;
+                font-size: 3.6rem;
+                margin-bottom: -13px;
+
+                @include xs {
+                    margin-top: 3vh;
+                    margin-bottom: -9px;
+                }
+
+                a {
+                    color: $xiketic;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        #main-container {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            margin: 0 6vw;
+
+            @include xs {
+                margin: 0 3vw;
+            }
+
+            .products-container {
+                display: grid;
+                gap: 6rem 3rem;
+                grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+                justify-content: center;
+                justify-items: center;
+            }
+
+            .link-box {
+                width: 50%;
+                list-style: none;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                font-size: 1.5rem;
+    
+                i {
+                    font-size: 1.5rem
+                }
+    
+                li {
+                    width: 50%;
+                    height: auto;
+                    text-align: center;
+                    color: $pumpkin;
+                    cursor: pointer;
+                    
+                    a {
+                        text-decoration: none;
+                        color: inherit;
+                    }
+    
+                    &:hover {
+                        font-size: 1.8rem;
+                    }
+                }
+            }
+    
+        }
+
+        footer {
+            height: 30px;
+            float: inline-end;
+            margin-top: 3vh;
+            width: 100%;
+            color: $cultured;
+            text-align: center;
+
+            a {
+                color: $light-green;
+            }
+        }
+    }
+}

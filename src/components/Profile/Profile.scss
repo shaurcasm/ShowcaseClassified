@@ -1,0 +1,25 @@
+@import '../../constants/colors.scss';
+@import '../../utils/responsive.scss';
+
+form {
+    color: $cultured;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    input {
+        margin-bottom: 1rem;
+    }
+
+    #update-submit-button {
+        margin: 2rem;
+        width: fit-content;
+        align-self: center;
+    }
+
+    #status {
+        color: $light-green;
+        text-align: center;
+    }
+}

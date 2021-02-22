@@ -1,0 +1,22 @@
+@import '../../constants/colors.scss';
+@import '../../utils/responsive.scss';
+
+#new-ad-form {
+    color: $black-chocolate;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    input {
+        margin-bottom: 1rem;
+    }
+
+    button {
+        margin: auto;
+    }
+}
+
+#new-ad-button {
+    width:fit-content;
+}

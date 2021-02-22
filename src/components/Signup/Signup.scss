@@ -1,0 +1,57 @@
+@import '../../constants/colors.scss';
+@import '../../utils/responsive.scss';
+
+#signup-container {
+    margin: auto;
+    padding: 1.5rem;
+    width: auto;
+    height: auto;
+    background-color: rgba($color: $liberty, $alpha: 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2 {
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+        font-size: 2.7rem;
+        text-align: center;
+        color: darken($cultured, 10%);
+    }
+
+    p {
+        margin: 0;
+        margin-bottom: 2rem;
+        text-align: center;
+        font-size: 1.2rem;
+        color: $pumpkin;
+    }
+
+    form {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 25% 1fr;
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 2rem;
+        align-items: center;
+
+        label {
+            grid-column: 1 / 2;
+            font-size: 1.5rem;
+            color: darken($cultured, 10%);
+        }
+
+        input, button {
+            height: auto;
+            grid-column: 2 / 3;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .submit-button {
+            height: auto;
+            width: 50%;
+            justify-self: center;
+        }
+    }
+}
