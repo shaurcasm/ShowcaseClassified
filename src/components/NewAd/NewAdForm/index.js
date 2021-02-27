@@ -27,8 +27,15 @@ const NewAdForm = ({ handleSuccess }) => {
         });
     }, []);
 
-    const validateSize = (file) => {
+    const validateFile = (file) => {
         let size = 3000000;
+        let regEx = /^[^.]+(\.jpg|\.png|\.jpeg)$/;
+        
+        if(!regEx.test(file.name)) {
+            setToastText('Upload a .jpeg, .jpg or .png format Image please');
+            setShowToast(true);
+            return false;
+        }
 
         if(file.size > size) {
             setToastText(file.type+' is too large, please pick a smaller file\n');
@@ -42,7 +49,7 @@ const NewAdForm = ({ handleSuccess }) => {
     const onFileChange = (event) => {
         var file = event.target.files[0];
 
-        if(validateSize(file)) {
+        if(validateFile(file)) {
             setImage(file);
         }
     }
@@ -51,28 +58,32 @@ const NewAdForm = ({ handleSuccess }) => {
         // Stop form actions
         event.preventDefault();
         event.stopPropagation();
+
+        event.target.submitButton.disabled = true;
     
         // Sending the form data as URLSearchparams, could also use json
         const data = new FormData()
         data.append('productname', productname);
         data.append('cost', cost);
         data.append('category', category);
-        data.append('image', image);
+        data.append('image-file', image);
         data.append('owner', ownerID);
 
-        //const ad = new URLSearchParams(data)
         // Send request to the server and store flash if there
         // If successful, store the received token in localStorage
         
         fetch('/api/add-ad', {
             method: 'POST',
+            headers: {
+                Accept: 'multipart/form-data'
+            },
             body: data
         }).then(res => {
             return res.json()
         }).then(data => {
             handleSuccess();
         }).catch(err => {
-            setToastText(err.json());
+            setToastText(JSON.stringify(err));
             setShowToast(true);
             console.error(err);
         });
@@ -119,16 +130,17 @@ const NewAdForm = ({ handleSuccess }) => {
                 </Form.Group>
 
                 <Form.Group controlId='formImage'>
-                    <Form.Label>Product Image</Form.Label>
+                    <Form.Label>Product Image <span style={{color:'red'}}>* Required</span></Form.Label>
                     <Form.File
                         type='file'
                         id='image-upload'
                         onChange={onFileChange}
-                        name='image_file'
+                        name='image-file'
+                        required
                     />
                 </Form.Group>
 
-                <Button variant='success' type='submit' size='sm'>
+                <Button name='submitButton' variant='success' type='submit' size='sm'>
                     Add this Ad
                 </Button>
             </Form>

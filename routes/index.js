@@ -1,6 +1,5 @@
 const express = require('express'),
     multer = require('multer'),
-    upload = multer({ dest: __dirname + '/images' }),
     passport = require('passport'),
     jwt = require('jsonwebtoken'),
     Users = require('../database/Users'),
@@ -45,13 +44,55 @@ router.post('/update-user', (req, res) => {
     });
 });
 
-router.post('/add-ad', upload.single('image_file'), (req, res) => {
+// Multer Uploading and saving image files.
+const storage = multer.diskStorage({
+    destination: './adImages',
+    filename: (req, file, cb) => {
+        var filename = Date.now();
+        switch(file.mimetype) {
+            case 'image/png':
+                filename = filename + '.png';
+                break;
+            case 'image/jpeg':
+                filename = filename + '.jpeg';
+                break;
+            default:
+                break;
+        }
+        cb(null, filename);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+router.post('/add-ad', upload.single('image-file'), (req, res) => {
     var file = req.file;
     var body = req.body;
+    var addProduct = require('../lib/addProduct');
 
-    console.log('file', file);
-    console.log('file path', file.path);
-    console.log('body', body);
+    if(!file) {
+        res.json('Error: No Image file received.');
+        return console.error('Error: No Image file received.');
+    }
+
+    if(!body) {
+        res.json('Error: No Body received.');
+        return console.error('Error: No Body received.');
+    }
+
+    var product = {
+        productname: body.productname,
+        cost: body.cost,
+        category: body.category,
+        imagePath: file.path,
+        owner: body.owner
+    }
+
+    addProduct(product, (err, status) => {
+        if(err) console.error(err);
+
+        else console.log(status);
+    })
 })
 
 // Log in

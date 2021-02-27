@@ -59,6 +59,7 @@ export default class Home extends Component {
                         
                     </ul>
                 </div>
+                <img src='./adImages/1614112968790.png' alt="It's britney bitch" />
                 
                 <div className='products-container'>
                     {this.productsToComponents()}
